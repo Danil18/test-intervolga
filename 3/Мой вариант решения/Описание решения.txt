@@ -1,0 +1,16 @@
+Можно избавиться от таблицы с победителями и просто получать первых трёх победителей 
+из таблицы с результатами с помощью SQL запроса к таблице Results. 
+К примеру, с помощью такого запроса: 
+
+SELECT competition.name, competition.date, sportsman.full_name, results.place 
+FROM results JOIN competition ON results.id_competition=competition.id 
+JOIN sportsman ON results.id_sportsman=sportsman.id 
+WHERE competition.id=2 LIMIT 3;
+
+Помимо этого можно избавиться от поля age из таблицы sportsman. 
+Ведь там уже содержется дата рождения и с её помощью можно узнать возраст спортсмена. 
+К примеру, с помощью запроса:
+
+SELECT TIMESTAMPDIFF(YEAR, birth, curdate()) AS years FROM sportsman;
+
+Да и возраст в виде отдельного поля надо будет периодически обновлять.
