@@ -25,12 +25,12 @@
             $content = file($_FILES["file"]["tmp_name"], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             for ($i = 0; $i < count($content); $i++) {
                 checkFilename($content[$i]);
-                $oneFileInfo = explode(",", quotemeta($content[$i]));
+                $oneFileInfo = explode(",", quotemeta(htmlspecialchars($content[$i])));
                 if (count($oneFileInfo) == 2) {
-                    $countEl = explode (".", $oneFileInfo[0]);
-                    $extensionFile = $countEl[count($countEl) - 1];
+                    $name = explode (".", $oneFileInfo[0]);
+                    $extensionFile = $name[count($name) - 1];
                     if (strlen($extensionFile) <= 5) {
-                      $filename = $_SERVER['DOCUMENT_ROOT'] . "/upload/" . ($i+1) .".". explode (".", trim($oneFileInfo[0]))[1];
+                      $filename = $_SERVER['DOCUMENT_ROOT'] . "/upload/" . ($i+1) .".". trim($name[1]);
                       file_put_contents($filename, $oneFileInfo[1]);
                     }
                 }
