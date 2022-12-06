@@ -20,7 +20,7 @@
         checkFilename($_FILES['file']['name']);
         if (is_uploaded_file($_FILES["file"]["tmp_name"])) {
             if (!is_dir($_SERVER['DOCUMENT_ROOT'] . "/upload/")) {
-              mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/", 0777);
+              mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/", 0644);
             }
             $content = file($_FILES["file"]["tmp_name"], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             for ($i = 0; $i < count($content); $i++) {
